@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>All in One Search Engine</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .video-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      background: #ffffff;
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    .video-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+      background-color: white;
+      border-radius: 10px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .thumbnail {
+      width: 100px;
+      height: auto;
+      margin-right: 20px;
+      border-radius: 10px;
+    }
+
+    .video-info {
+      flex: 1;
+    }
+
+    .video-info a,
+    .video-info p {
+      font-size: 9px;
+      color: #333; /* Adjust the font size as needed */
+    }
+    .video-item:hover {
+      background-color: #e5e5e5;
+    }
+
+    .logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-left: auto;
+    }
+    @media (max-width: 768px) {
+      .video-list {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .video-item {
+        width: 100%;
+      }
+    }
+
+    .video-info a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .video-info p {
+      margin: 5px 0;
+    }
+   
+    .video-item.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* section {
+      position: relative;
+    }
+
+    section img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: -1;
+    } */
+
+    #result-count {
+  padding: 10px;
+  background-color: #1c0522;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  display: none;
+  
+}
+.hashtags .hidden {
+  display: none;
+}
+
+
+  </style>
+</head>
+<body>
+  <nav class="flex-div">
+    <div class="nav-left">
+      
+
+    </div>
+    <div class="nav-middle">
+       
+    </div>
+    <div class="nav-right"></div>
+  </nav>
+
+  <section>
+    <img src="stars.png" id="stars" alt="Stars" />
+    <img src="moon.png" id="moon" alt="Moon" />
+    <img src="mountains_behind.png" id="mountains_behind" alt="Mountains Behind" />
+   
+    
+    <img src="mountains_front.png" id="mountains_front" alt="Mountains Front" />
+    
+  </section>
+  
+
+  <div class="video-list">
+    <div class="video-item">
+      <img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" />
+      <div class="video-info">
+        <div>
+          <a href="">Best channel of the world this channel.</a>
+          <p>ramalinga</p>
+          <p>20k views 2 days ago</p>
+          <div class="hashtags">
+            <p class="hidden">bluecolor,red color yellow color</p>
+          </div>
+        </div>
+      </div>
+      <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+    </div>
+  
+    <!-- Add more video items similarly -->
+  </div>
+
+  <script>
+    // Scroll effect script remains the same
+    let stars = document.getElementById('stars');
+    let moon = document.getElementById('moon');
+    let mountains_behind = document.getElementById('mountains_behind');
+    let text = document.getElementById('text');
+    let btn = document.getElementById('btn');
+    let mountains_front = document.getElementById('mountains_front');
+    let header = document.querySelector('header');
+
+    window.addEventListener('scroll', function() {
+      let value = window.scrollY;
+      stars.style.left = value * 0.25 + 'px';
+      moon.style.top = value * 1.05 + 'px';
+      mountains_behind.style.top = value * 0.5 + 'px';
+      mountains_front.style.top = value * 0 + 'px';
+      text.style.marginRight = value * 4 + 'px';
+      text.style.marginTop = value * 1.5 + 'px';
+      btn.style.marginTop = value * 1.5 + 'px';
+      header.style.top = value * 0.5 + 'px';
+    });
+    
+
+
+  </script>
+</body>
+</html>

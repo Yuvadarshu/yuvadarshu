@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <title>Yuvadarshu search engine</title>
+  <style>
+
+
+
+
+*
+{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent !important;
+
+
+
+}
+a{
+    text-decoration: none;
+    color: #5a5a5a;
+    background: #fff;
+    cursor: pointer;
+}
+
+img{
+    cursor: pointer;
+    
+
+}
+
+
+body
+{
+    min-height: 100vh;
+    background:linear-gradient(#2b1055,#7597de);
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+}   
+
+section
+ {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+ section::before
+    {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top,#1c0522,transparent);
+    z-index: 1000;
+    }
+    section img
+    {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+        }
+        section img#moon
+        {
+            mix-blend-mode: screen;
+        }
+        section img#mountains_front
+        {
+            z-index: 10;
+        }
+        #text
+        {
+            position: absolute;
+            color: #fff;
+            white-space: nowrap;
+            font-size: 7.5vw;
+            z-index: 9;
+            right: -350px;
+        }
+        #btn 
+        {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 40px;
+            background:#fff;
+            color: #2b1055;
+            font-size: 1.5em;
+            z-index: 9;
+            transform: translateY(100px);
+        }
+.sec
+    {
+    position: relative;
+    /* padding: 100px; */
+    background: #1c0522;
+
+    display: flex;
+    flex-direction: column;
+    color: #f9fafb;
+    padding: 0 40px;
+    height: 100%;
+    overflow: auto;
+    
+            } 
+        
+ .list-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-column-gap: 16px;
+    grid-row-gap: 30px;
+    margin-top: 15px;
+ }
+ .list-container img{
+    background: #fff;
+ }
+
+.vid-list .thumbnail{
+    width: 100%;
+    border-radius: 2.5px;
+    padding-bottom: 0;
+}
+.vid-list .flex-div{
+    background: #fff;
+    align-items: flex-start;
+    margin-top: 0;
+    width: 100%;
+    padding-top:10;
+}
+.vid-list .flex-div img{
+width: 30px;
+margin-right: 300px;
+border-radius: 50%;
+margin-top: 0;
+padding-bottom:10px;
+}
+.vid-info{
+    color: #5a5a5a;
+    font-size: 13px;
+}
+.vid-info a{
+    color: #000;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+
+}
+ nav{
+    padding: 10px 2%;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0 0 0 0.2);
+    background: #34255c;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+}
+.nav-right img{
+    width: 25px;
+    margin-right: 25px;
+}
+.nav-right .user-icon{
+width: 35px;
+border-radius: 30%;
+margin-right: 0;
+}
+.nav-middle .mic-icon{
+    width: 16px;
+}
+.nav-middle .search-box{
+    border: 1px solid #ccc;
+    margin-right: 15px;
+    padding: 8px 12px;
+    border-radius: 25px;
+}
+
+ 
+
+ 
+
+
+@media (max-width: 768px) {
+      .video-list {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .video-item {
+        width: 100%;
+      }
+    }
+   
+    .suggestion-item.results-suggestion {
+  font-weight: bold;
+  color: #1c0522; /* Adjust the color as needed */
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+  cursor: default; /* Disable pointer cursor for "Results" suggestion */
+}
+
+.suggestion-item.results-suggestion:hover {
+  background-color: #e0e0e0; /* Adjust the hover background color as needed */
+}
+
+
+    .video-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      background: #1c0522;
+      margin: 0 auto;
+    }
+
+    .video-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      align-items: center;
+
+      text-align: left;
+      background-color: white;
+      border-radius: 10px;
+    } 
+
+    .thumbnail {
+      width: 100%;
+      border-radius: 10px;
+
+    }
+
+    .video-info {
+      display: flex;
+      align-items: top;
+      
+    }
+
+    .logo {
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .video-info a {
+      color: #000000;
+      text-decoration: none;
+      font-size: 13px;
+      
+
+    }
+    
+    /* .video-item:hover {
+      background-color: #e5e5e5;
+    } */
+
+    .video-info p {
+      margin: 5px 0;
+      font-size: 13px;
+      color: #333; /* Adjust the font size as needed */
+
+
+
+    }
+    .search-bar-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .search-bar {
+      width: 250px;
+      padding: 10px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: width 0.3s ease-in-out;
+    }
+
+    .search-bar::placeholder {
+      color: #999;
+    }
+
+    /* .search-bar:focus {
+      width: 400px;
+    } */
+
+    .search-bar-button {
+      border: none;
+      background-color: #1c0522;
+      color: white;
+      border-radius: 25px;
+      padding: 10px 20px;
+      margin-left: -50px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .search-bar:focus {
+      width: 260px;
+    } 
+
+    .search-bar-button:hover {
+      background-color: #333;
+    }
+    /* .video-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+      background-color: white;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    } */
+
+    .video-item.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+   
+.hashtags .hidden {
+  display: none;
+}
+
+#suggestion-list {
+    position: absolute;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 95%; /* Make the suggestion list the same width as the search bar */
+    top:10%; /* Position it below the search bar */
+    margin-top: 5px; /* Add some spacing between the search bar and the suggestion list */
+}
+#result-count {
+  padding: abosolute;
+  z-index: 1000;
+  overflow-y: auto;
+
+
+  background-color: #1c0522;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  display: none;
+  width: 50%; /* Make the suggestion list the same width as the search bar */
+    top: 1000%; /* Position it below the search bar */
+    margin-top: 5px; 
+  
+}
+
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+
+  .suggestion-item:hover {
+    background-color: #f0f0f0;
+  }
+
+  
+.category-buttons-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    background: #1c0522;
+  }
+
+  .category-buttons-container button {
+    padding: 10px 20px;
+    margin-right: 10px; /* Add some space between buttons */
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    white-space: nowrap; /* Prevent line breaks */
+  }
+
+  .category-buttons-container button.active {
+    background-color: #d11212;
+    color: #2113e1;
+  }
+
+   /* Style for sort buttons */
+#sort-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#sort-buttons button {
+  padding: 12px 24px;
+  margin: 0 10px;
+  font-size: 16px;
+  background-color: #1c0522;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#sort-buttons button:hover {
+  background-color: #26063c;
+}
+
+#sort-buttons button:active {
+  background-color: #1c0522;
+  transform: scale(0.95);
+}
+
+/* Additional styling for a smooth transition */
+#sort-buttons button:focus {
+  outline: none;
+}
+
+/* Add box shadow for a subtle depth effect */
+#sort-buttons button {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+nav {
+      background-color: #1c0522;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adding a shadow */
+    }
+
+    .nav-left {
+      font-size: 1.2em;
+      transition: color 0.3s; /* Transition on hover */
+    }
+    .nav-left:hover {
+      color: #f0c419; /* Change color on hover */
+    }
+    .nav-left a{
+      background-color: transparent;
+      transition: color 0.3s;
+      color: #fb00ff;
+    }
+    .nav-left a:hover{
+      color: #f0c419; 
+
+    }
+    
+    
+
+    .navbar-icons {
+      display: flex;
+      gap: 10px; /* Adding gap between icons */
+    }
+
+    .navbar-icons span {
+    font-size: 1.5em;     
+    transition: color 0.3s, transform 0.3s; /* Adding transition for transform */
+  }
+
+  .navbar-icons span:hover {
+    color: #f0c419;
+    cursor: pointer;
+    transform: scale(1.2); /* Zoom in effect on hover */
+  }
+
+  .navbar-icons i {
+    font-size: 1.5em;
+    transition: color 0.3s, transform 0.3s; /* Adding transition for transform */
+  }
+
+  .navbar-icons i:hover {
+    color: #f0c419;
+    cursor: pointer;
+    transform: rotate(45deg); /* Rotate effect on hover */
+  }
+  /* Style for date picker */
+/* Style for date picker */
+.date-picker {
+  margin: 20px 0;
+  display: none;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.date-picker label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-picker input[type="date"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(100% - 22px);
+  margin-bottom: 15px;
+}
+
+.date-picker button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1c0522;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.date-picker button:hover {
+  background-color: #26063c;
+}
+
+/* Style for toggle button */
+.toggle-button {
+
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1c0522;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-button:hover {
+  background-color: #26063c;
+}
+
+.filtered-videos-container {
+  /* Existing styles */
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  
+  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add box shadow */
+  border-radius: 10px; /* Add border radius */
+
+}
+
+.filtered-videos-container .video-item {
+  /* Existing styles */
+  border: 1px solid #ccc;
+
+
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 10px; /* Add some spacing between videos */
+    min-width: 300px;  
+}
+/* Existing styles */
+
+/* Dropdown styles */
+.dropdown-content {
+
+display: none;
+
+    position: absolute;
+
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 2;
+    text-align: center; /* Center the text */
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show-dropdown {
+    display: block;
+}
+.dropdown-content a {
+    text-align: center;
+}
+#dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the settings icon */
+  right: 0; /* Align to the right */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#dropdown-menu.active {
+  display: block;
+}
+
+.apps {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  gap: 1px; /* Adding gap between icons */
+}
+.apps span {
+  font-size: 1.5em;
+  transition: color 0.3s, transform 0.3s; /* Adding transition for transform */
+}
+.apps span:hover {
+  color: #f0c419;
+  cursor: pointer;
+  transform: scale(1.2); /* Zoom in effect on hover */
+}
+.apps i {
+  font-size: 1.5em;
+  transition: color 0.3s, transform 0.3s; /* Adding transition for transform */
+}
+.apps i:hover {
+  color: #f0c419;
+  cursor: pointer;
+  transform: rotate(45deg); /* Rotate effect on hover */
+}
+html {
+    scroll-behavior: smooth;
+}
+
+
+#backtotop-btn {
+    visibility: hidden;
+    position: fixed;
+    cursor: pointer;
+    right: 16px;
+    bottom: 120px;
+    user-select: none;
+    transition: 1s;
+}
+
+.rocket {
+    display: block;
+    font-size: 35px;
+    transform: rotate(315deg);
+}
+
+
+
+
+.arrow-top {
+    display: block;
+    width: 64px;
+    height: 64px;
+    pointer-events: none;
+    background-color: #0fb;
+    border-radius: 50%;
+}
+
+.slide-in-bottom {
+    -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.slide-out-top {
+    -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+
+@-webkit-keyframes slide-in-bottom {
+    0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-bottom {
+    0% {
+        -webkit-transform: translateY(1000px);
+        transform: translateY(1000px);
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+}
+
+@keyframes slide-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: translateY(-1000px);
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in-center {
+    0% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes scale-out-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-out-center {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 1;
+    }
+}
+
+
+
+/* CSS to style the scrollable dropdown content and close icon */
+.scrollable-content {
+    max-height: 500px; /* Adjust the maximum height to your preference */
+    overflow-y: auto;
+}
+
+.close-icon {
+    cursor: pointer;
+    display: block;
+    color: red; /* Change the color to your desired color */
+    padding: 10px; /* Adjust the padding as needed */
+    border: 1px solid red; /* Add a border for a button-like appearance */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    margin-bottom: 5px; /* Optional: Add some margin between items */
+}
+
+.close-icon:hover {
+    background-color: #ffdddd; /* Change the background color on hover */
+}
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <span id="backtotop-btn">
+    <!------------------------->
+    <!-- ROCKET EMOJI BUTTON -->
+    <!------------------------->
+    <span class="rocket">🚀</span>
+    <!----------------->
+    <!-- TEXT BUTTON -->
+    <!----------------->
+    <!-- <span class="text">Back To Top</span> -->
+    <!-------------------------->
+    <!-- ARROW TOP SVG BUTTON -->
+    <!-------------------------->
+    <!-- <img class="arrow-top" src="https://www.linkpicture.com/q/up-arrow.svg"> -->
+</span>
+  <nav>
+    
+    
+    <div class="nav-right navbar-icons">
+      <span onclick="toggleDropdown('settingsDropdown')">🔍</span>
+      
+  </div>
+  <div class="apps">
+    <span onclick="toggleDropdown('appsDropdown')">📱</span>
+    <span onclick="toggleDropdown('appsDropdown')">💎</span>
+    <span onclick="toggleDropdown('appsDropdown')">📱</span>
+    <span onclick="toggleDropdown('appsDropdown')">📱</span>
+    <span onclick="toggleDropdown('appsDropdown')">📱</span>
+    
+   
+  </div>
+  <div class="nav-left">
+    <a href="#">Yuvadarshu</a>
+  </div>
+</nav>
+
+<div class="dropdown" id="dropdown">
+  <div class="dropdown-content" id="dropdownContent">
+    <div class="scrollable-content">
+
+    <a href="#"></a>
+    <a href="#"></a>
+    <a href="#"></a>
+
+    <div id="sort-buttons">
+      <button onclick="sortByNewest()">Newest</button>
+      <button onclick="sortByOldest()">Oldest</button>
+    </div>
+    <button class="toggle-button" onclick="toggleDatePicker()">Toggle Date Filter</button>
+
+      <div class="date-picker">
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" />
+        <button onclick="filterVideos()">Filter Videos</button>
+      </div>
+    
+   
+    <a href="#">Settings 0</a>
+    <a href="#">Settings 1</a>
+    <a href="#">Settings 2</a>
+    <span class="close-icon" onclick="closeDropdown()">Close Dropdown</span>
+  </div>
+
+  </div>
+</div>
+  
+
+  <section>
+    <img src="stars.png" id="stars" alt="Stars" />
+    <img src="moon.png" id="moon" alt="Moon" />
+    <img src="mountains_behind.png" id="mountains_behind" alt="Mountains Behind" />
+
+    <span></span>
+    <span></span>
+
+    <span></span>
+
+    <span></span>
+
+
+    <span></span>
+
+
+
+    <div class="search-bar-container">
+
+        <input type="text" class="search-bar" placeholder="Search...">
+       
+        
+        <button class="search-bar-button">Search</button>
+        <button onclick="runSpeechRecog()" style=
+        "border: transparent;
+        color: #1c0522;
+        background-color: #1c0522;
+        
+        border-radius: 0 0.5rem;">
+  
+          🎤
+        </button>
+        <!-- <div id="result-count">Results: 0</div> -->
+
+      </div>
+
+
+      <div id="suggestion-list">
+
+      </div>
+    <!-- <a href="#" id="btn">Explore</a> -->
+    
+    
+  </section>
+  <div id="search-results"></div>
+
+
+  <div id="filtered-videos" class="filtered-videos-container"></div>
+  <div id="no-results-message" style="display: none; padding: 10px; background-color: #ff0000; color: white; border-radius: 10px; font-size: 18px; text-align: center;">
+    No results found.
+    <P> you can see latest videos at here</P>
+    
+    <div>
+        
+    </div>
+
+  </div>
+  
+  <div class="category-buttons-container">
+    <button onclick="filterByCategory('all')">All</button>
+    <button onclick="filterByCategory('tech')">Tech</button>
+    <button onclick="filterByCategory('tutorials')">Tutorials</button>
+    <button onclick="filterByCategory('all')">All</button>
+    <button onclick="filterByCategory('tech')">Tech</button>
+    <button onclick="filterByCategory('tutorials')">Tutorials</button>
+    <!-- Add more buttons for other categories as needed -->
+  </div>
+ 
+  
+ 
+
+  <div class="video-list">
+   
+    <div class="video-item"  data-category="tech"  data-date="2023-10-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>ramalinga</p>
+          <a href="">Best channel of the world this channel.</a>
+          
+          <p>20k views 2 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">bluecolor,red color yellow color</p>
+          <p  class="hidden">color</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2023-03-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>shoko</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">lake</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2023-03-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>b</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">lake</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2023-03-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>k</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">lake</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2023-03-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>i</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">lake</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2024-03-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>lkk</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">cable</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-item"  data-category="tutorials"  data-date="2023-08-02">
+      <a href=""><img src="robo1.jpg" class="thumbnail" alt="Thumbnail 1" /></a>
+      <div class="video-info">
+        <img src="robo3.jpg" class="logo" alt="Channel Logo" />
+        <div>
+          <p>ghdhg</p>
+          <a href="">waste channel of the world this channel.</a>
+          
+          <p>19k views 5 days ago</p>
+          <div class="hashtags">
+          <p  class="hidden">jockey,red color yellow color</p>
+          <p  class="hidden">lake</p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add more video items similarly -->
+  </div>
+
+  <script>
+    // Scroll effect script remains the same
+    let stars = document.getElementById('stars');
+    let moon = document.getElementById('moon');
+    let mountains_behind = document.getElementById('mountains_behind');
+    let text = document.getElementById('text');
+    let btn = document.getElementById('btn');
+    let mountains_front = document.getElementById('mountains_front');
+    let header = document.querySelector('header');
+
+    window.addEventListener('scroll', function() {
+      let value = window.scrollY;
+      stars.style.left = value * 0.25 + 'px';
+      moon.style.top = value * 1.05 + 'px';
+      mountains_behind.style.top = value * 0.5 + 'px';
+      mountains_front.style.top = value * 0 + 'px';
+      text.style.marginRight = value * 4 + 'px';
+      text.style.marginTop = value * 1.5 + 'px';
+      btn.style.marginTop = value * 1.5 + 'px';
+      header.style.top = value * 0.5 + 'px';
+    });
+    
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchBar = document.querySelector('.search-bar');
+      const videoItems = document.querySelectorAll('.video-item');
+      const resultCount = document.getElementById('result-count');
+      const noResultsMessage = document.getElementById('no-results-message');
+
+      searchBar.addEventListener('input', function() {
+        const searchTerm = searchBar.value.toLowerCase();
+        const searchWords = searchTerm.trim().split(' ').filter(word => word !== '');  // Split search term into words and filter out empty words
+        const searchWordsWithoutHashtags = searchWords.map(word => word.replace('#', ''));  // Remove '#' from words
+
+        let visibleItemCount = 0;
+
+        videoItems.forEach(videoItem => {
+          const title = videoItem.querySelector('.video-info a').innerText.toLowerCase();
+          const description = videoItem.querySelectorAll('.video-info p')[0].innerText.toLowerCase();
+          const paragraphs = Array.from(videoItem.querySelectorAll('.video-info p')).slice(1).map(p => p.innerText.toLowerCase());
+          const hashtags = Array.from(videoItem.querySelectorAll('.hashtags p.hidden')).map(p => p.innerText.toLowerCase());
+
+          // Check if any of the search words (without hashtags) are present in title, description, or paragraphs
+          const found = searchWordsWithoutHashtags.some(word => title.includes(word) || description.includes(word) || paragraphs.some(paragraph => paragraph.includes(word)) || hashtags.includes(word));
+
+          if (found) {
+            videoItem.style.display = 'block';
+            visibleItemCount++;
+          } else {
+            videoItem.style.display = 'none';
+          }
+        });
+
+        if (visibleItemCount === 0 && searchTerm.trim() !== '') {
+          noResultsMessage.style.display = 'block';
+          videoItems.forEach(videoItem => {
+            videoItem.style.display = 'block'; // Show all videos when there are no search results
+          });
+        } else if (searchTerm.trim() === '') {
+          noResultsMessage.style.display = 'none';
+          videoItems.forEach(videoItem => {
+            videoItem.style.display = 'block'; // Show all videos when the search query is cleared
+          });
+        } else {
+          noResultsMessage.style.display = 'none';
+        }
+
+        if (visibleItemCount > 0 && searchTerm.trim() !== '') {
+          resultCount.style.display = 'block';
+          resultCount.innerText = `Results: ${visibleItemCount}`;
+        } else {
+          resultCount.style.display = 'none';
+        }
+      });
+    });
+
+
+    
+  const videoItems = Array.from(document.querySelectorAll('.video-item'));
+  const searchBar = document.querySelector('.search-bar');
+  const suggestionList = document.getElementById('suggestion-list');
+
+  searchBar.addEventListener('input', function() {
+    const searchTerm = searchBar.value.toLowerCase();
+    displaySuggestions(getMatchingKeywords(searchTerm));
+  });
+
+  function getMatchingKeywords(searchTerm) {
+    const keywords = new Set();
+
+    videoItems.forEach(videoItem => {
+      const title = videoItem.querySelector('.video-info a').innerText.toLowerCase();
+      const description = videoItem.querySelectorAll('.video-info p')[0].innerText.toLowerCase();
+      const paragraphs = Array.from(videoItem.querySelectorAll('.video-info p')).slice(1).map(p => p.innerText.toLowerCase());
+
+      // Check if the search term is found in title, description, or paragraphs
+      if (title.includes(searchTerm)) {
+        keywords.add(title);
+      }
+
+      if (description.includes(searchTerm)) {
+        keywords.add(description);
+      }
+
+      paragraphs.forEach(paragraph => {
+        if (paragraph.includes(searchTerm)) {
+          keywords.add(paragraph);
+        }
+      });
+    });
+
+    return Array.from(keywords);
+    
+  }
+  
+
+  function displaySuggestions(suggestions) {
+  suggestionList.innerHTML = ''; // Clear previous suggestions
+
+  // Add "Results" suggestion at the top
+  const resultsSuggestionItem = document.createElement('div');
+  resultsSuggestionItem.classList.add('suggestion-item', 'results-suggestion');
+  resultsSuggestionItem.innerText = `Results: ${suggestions.length}`;
+  resultsSuggestionItem.addEventListener('click', () => {
+    // Do something when "Results" suggestion is clicked
+  });
+  suggestionList.appendChild(resultsSuggestionItem);
+
+  suggestions.forEach(suggestion => {
+    const suggestionItem = document.createElement('div');
+    suggestionItem.classList.add('suggestion-item');
+    suggestionItem.innerText = suggestion;
+
+    suggestionItem.addEventListener('click', () => {
+  searchBar.value = suggestion;  // Set the suggestion in the search bar
+  suggestionList.style.display = 'none';  // Hide the suggestion list
+
+  // Trigger a search when a suggestion is clicked
+  const event = new Event('input', {
+    bubbles: true,
+    cancelable: true,
+  });
+  searchBar.dispatchEvent(event);
+});
+
+    suggestionList.appendChild(suggestionItem);
+  });
+
+  // Show/hide suggestion list based on the number of suggestions
+  suggestionList.style.display = suggestions.length > 0 ? 'block' : 'none';
+}
+
+  document.body.addEventListener('click', function(event) {
+  // Check if the click is outside the suggestion list and the search bar
+  const isClickInsideSuggestionList = event.target.closest('#suggestion-list');
+  const isClickInsideSearchBar = event.target.classList.contains('search-bar');
+
+  // Hide the suggestion list if the click is outside both the suggestion list and the search bar
+  if (!isClickInsideSuggestionList && !isClickInsideSearchBar) {
+    suggestionList.style.display = 'none';
+  }
+});
+
+
+// handle click filter
+
+
+    // newest oldest
+
+    function sortByNewest() {
+  const videoList = document.querySelector('.video-list');
+  const videoItems = Array.from(videoList.querySelectorAll('.video-item'));
+
+  videoItems.sort((a, b) => {
+    const dateA = new Date(a.dataset.date);
+    const dateB = new Date(b.dataset.date);
+    return dateB - dateA;
+  });
+
+  videoList.innerHTML = ''; // Clear the current video list
+
+  for (const videoItem of videoItems) {
+    videoList.appendChild(videoItem);
+  }
+}
+
+function sortByOldest() {
+  const videoList = document.querySelector('.video-list');
+  const videoItems = Array.from(videoList.querySelectorAll('.video-item'));
+
+  videoItems.sort((a, b) => {
+    const dateA = new Date(a.dataset.date);
+    const dateB = new Date(b.dataset.date);
+    return dateA - dateB;
+  });
+
+  videoList.innerHTML = ''; // Clear the current video list
+
+  for (const videoItem of videoItems) {
+    videoList.appendChild(videoItem);
+  }
+}
+
+
+function toggleDatePicker() {
+  const datePicker = document.querySelector('.date-picker');
+  const filteredVideosContainer = document.getElementById('filtered-videos');
+
+  if (datePicker.style.display === 'none' || datePicker.style.display === '') {
+    datePicker.style.display = 'block';
+    // Show filtered videos if there are any
+    if (filteredVideosContainer.innerHTML.trim() !== '') {
+      filteredVideosContainer.style.display = 'flex';
+    }
+  } else {
+    datePicker.style.display = 'none';
+    // Hide filtered videos
+    filteredVideosContainer.style.display = 'none';
+  }
+}
+
+function filterVideos() {
+    const selectedDate = document.getElementById('date').value;
+    const filteredVideos = [];
+
+    // Filter video items based on the selected date
+    const videoItems = document.querySelectorAll('.video-item');
+    videoItems.forEach(video => {
+      const videoDate = video.getAttribute('data-date');
+      if (videoDate === selectedDate) {
+        filteredVideos.push(video.cloneNode(true));
+      }
+    });
+
+    const filteredVideosContainer = document.getElementById('filtered-videos');
+    filteredVideosContainer.innerHTML = ''; // Clear previous content
+
+    if (filteredVideos.length > 0) {
+      filteredVideos.forEach(video => {
+        filteredVideosContainer.appendChild(video);
+      });
+      filteredVideosContainer.style.display = 'flex'; // Show the filtered videos container
+    } else {
+      filteredVideosContainer.textContent = 'No videos found for the selected date.';
+      filteredVideosContainer.style.display = 'none'; // Hide the filtered videos container
+    }
+  }
+  function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Function to shuffle video items
+    function shuffleVideoItems() {
+      const videoItems = document.querySelectorAll('.video-item');
+      const shuffledVideoItems = shuffleArray(Array.from(videoItems));
+
+      // Clear existing video list
+      const videoList = document.querySelector('.video-list');
+      videoList.innerHTML = '';
+
+      // Append shuffled video items to the video list
+      shuffledVideoItems.forEach(item => {
+        videoList.appendChild(item);
+      });
+    }
+
+    // Shuffle video items when the page loads
+    window.onload = function() {
+      shuffleVideoItems();
+    };
+    function toggleDropdown(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+
+    // Toggle the class to show/hide the dropdown
+    dropdown.classList.toggle('show-dropdown');
+
+    // Hide dropdown when clicking outside
+    window.onclick = function(event) {
+        if (!event.target.matches('.navbar-icons span')) {
+            const dropdowns = document.getElementsByClassName('dropdown-content');
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show-dropdown')) {
+                    openDropdown.classList.remove('show-dropdown');
+                }
+            }
+        }
+    }
+}
+
+
+const navbarIcons = document.querySelector('.navbar-icons');
+    const dropdown = document.getElementById('dropdown');
+    const dropdownContent = document.getElementById('dropdownContent');
+
+    navbarIcons.addEventListener('click', () => {
+      dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+      positionDropdown();
+    });
+
+    window.addEventListener('resize', () => {
+      positionDropdown();
+    });
+
+    function positionDropdown() {
+      const rect = navbarIcons.getBoundingClientRect();
+      dropdown.style.top = (rect.bottom + window.scrollY) + 'px';
+      dropdown.style.left = rect.left + 'px';
+    }
+     // JavaScript code for filtering video items by category
+     function filterByCategory(category) {
+            const videoItems = document.querySelectorAll('.video-item');
+            
+            videoItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                if (category === 'all' || category === itemCategory) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+
+        
+   
+        let isListening = false;
+   
+
+
+
+
+
+
+   function runSpeechRecog() {
+ const searchBar = document.querySelector('.search-bar');
+ const videoItems = document.querySelectorAll('.video-item');
+ const noResultsMessage = document.getElementById('no-results-message');
+
+ if (!isListening) {
+   searchBar.placeholder = 'Listening...';
+
+   const recognition = new webkitSpeechRecognition();
+   recognition.onstart = () => {
+     console.log('Speech recognition started');
+   };
+
+   recognition.onresult = (event) => {
+     const transcript = event.results[0][0].transcript;
+     // Filter out non-alphanumeric characters and convert to lowercase
+     const filteredTranscript = transcript.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase();
+     searchBar.value = filteredTranscript;
+     searchBar.placeholder = '🎤 Search...';
+
+     // Separate video items into two groups: matches and non-matches
+     const matchingItems = [];
+     const nonMatchingItems = [];
+
+     videoItems.forEach((item) => {
+       const videoInfo = item.querySelector('.video-info');
+       const videoTitle = videoInfo.querySelector('a').innerText.toLowerCase();
+       const paragraphText = videoInfo.querySelector('p').innerText.toLowerCase();
+       const hashtags = Array.from(videoInfo.querySelectorAll('.hashtags p.hidden')).map(p => p.innerText.toLowerCase());
+
+       if (videoTitle.includes(filteredTranscript) || 
+            paragraphText.includes(filteredTranscript) ||
+            hashtags.includes(filteredTranscript)) {
+          matchingItems.push(item);
+        } else {
+          nonMatchingItems.push(item);
+        }
+      });
+
+     // Display matching video items first, then non-matching ones
+     videoItems.forEach((item) => {
+        if (matchingItems.includes(item)) {
+          item.classList.add('show');
+        } else {
+          item.classList.remove('show');
+        }
+      });
+
+
+     // Display message if no results found
+     if (matchingItems.length === 0) {
+       noResultsMessage.style.display = 'block';
+     } else {
+       noResultsMessage.style.display = 'none';
+     }
+   };
+
+   recognition.onend = () => {
+     searchBar.placeholder = '🎤 Search...';
+     isListening = false;
+
+     // If no text was transcribed, show all videos
+     if (searchBar.value.trim() === '') {
+       videoItems.forEach((item) => {
+         item.classList.add('show');
+       });
+
+       noResultsMessage.style.display = 'none';
+     }
+   };
+
+   recognition.start();
+   isListening = true;
+ } else {
+   searchBar.placeholder = '🎤 Search...';
+   recognition.stop();
+   isListening = false;
+ }
+}
+
+
+
+
+
+    // Getting back to top button
+    const backtotop_btn = document.getElementById("backtotop-btn")
+
+// When page is being scrolled
+window.onscroll = function () {
+    /*
+    • When scrolling down 700px from the top of the page, display the button
+    • document.documentElement - For Chrome, Firefox, IE and Opera
+    • document.body - For Safari
+    */
+    if (document.documentElement.scrollTop > 700 || document.body.scrollTop > 700) {
+        /* ROCKET EMOJI - SHOW ANIMATION */
+        backtotop_btn.setAttribute("class", "slide-in-bottom")
+
+        /* TEXT & ARROW TOP SVG - SHOW ANIMATION */
+        // backtotop_btn.setAttribute("class", "scale-in-center")
+
+        // Show back to top button
+        backtotop_btn.style.visibility = "visible"
+    } else {
+        /* ROCKET EMOJI - HIDE ANIMATION */
+        backtotop_btn.setAttribute("class", "slide-out-top")
+
+        /* TEXT & ARROW TOP SVG - HIDE ANIMATION */
+        // backtotop_btn.setAttribute("class", "scale-out-center")
+
+        // Hide back to top button
+        backtotop_btn.style.visibility = "hidden"
+    }
+}
+
+// When back to top button is clicked
+backtotop_btn.onclick = function () {
+    // For Chrome, Firefox, IE and Opera
+    document.documentElement.scrollTop = 0
+    // For Safari
+    document.body.scrollTop = 0
+}
+
+function closeDropdown() {
+    const dropdownContent = document.getElementById('dropdownContent');
+    dropdownContent.style.display = 'none';
+}
+
+    
+
+
+  </script>
+</body>
+</html>
